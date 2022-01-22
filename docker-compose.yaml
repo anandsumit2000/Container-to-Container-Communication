@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  students-mysql:
+    container_name: demo-mysql
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql
+    restart: always
+
+  students-app:
+    container_name: demo-app
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    depends_on:
+      - students-mysql
+    ports:
+      - "8181:8181"
+    restart: always
